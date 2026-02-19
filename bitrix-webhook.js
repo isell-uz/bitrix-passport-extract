@@ -146,7 +146,8 @@ const bitrixWebhook = async function (req, res) {
             name: '',
             patronymic: '',
             birthDate: '',
-            birthPlace: ''
+            birthPlace: '',
+            mrz: ''
         };
 
         for (const {id: fileId, showUrl} of passportFiles) {
@@ -164,6 +165,7 @@ const bitrixWebhook = async function (req, res) {
                         patronymic: prediction.patronymic.value || '',
                         birthDate: prediction.date_of_birth.value || '',
                         birthPlace: prediction.place_of_birth.value || '',
+                        mrz: prediction.mrz.value || ''
                     };
 
                     // Only update if we have a value
@@ -197,6 +199,7 @@ const bitrixWebhook = async function (req, res) {
                         patronymic: passportDetails.patronymic || prediction.patronymic.value,
                         birthDate: passportDetails.date_of_birth || date_of_birth,
                         birthPlace: passportDetails.place_of_birth || prediction.place_of_birth.value,
+                        mrz: prediction.mrz.value || ''
                     };
 
                     // Only update if we have a value
@@ -282,7 +285,9 @@ const bitrixWebhook = async function (req, res) {
 
                     'STATUS_ID': statusId,
 
-                    'SECOND_NAME': latinToCyrillic(passportDetails.patronymic)
+                    'SECOND_NAME': latinToCyrillic(passportDetails.patronymic),
+
+                    'UF_CRM_1771497129503': passportDetails.mrz
                 };
 
                 await bitrix.call('crm.lead.update', {
