@@ -199,7 +199,7 @@ const bitrixWebhook = async function (req, res) {
                         patronymic: passportDetails.patronymic || prediction.patronymic.value,
                         birthDate: passportDetails.date_of_birth || date_of_birth,
                         birthPlace: passportDetails.place_of_birth || prediction.place_of_birth.value,
-                        mrz: passporDetails.mrz. || prediction.mrz.value
+                        mrz: passporDetails.mrz || prediction.mrz.value
                     };
 
                     // Only update if we have a value
